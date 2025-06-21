@@ -75,6 +75,7 @@ impl Judger {
                 })
                 .stdin(Stdio::piped())
                 .stdout(Stdio::piped())
+                .stderr(Stdio::piped())
                 .spawn()?;
 
             let stdin = run_command.stdin.as_mut().unwrap();
