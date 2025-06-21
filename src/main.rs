@@ -1,10 +1,10 @@
 use anyhow::Result;
-use cargo_atest::{atcoder_client::AtcoderClient, html_parser::HtmlParser, judger::Judger};
+use cargo_acj::{atcoder_client::AtcoderClient, html_parser::HtmlParser, judger::Judger};
 use clap::Parser;
 
 #[derive(Parser)]
 #[command(
-    name = "cargo-atest",
+    name = "cargo-acj",
     about = "AtCoderのサンプルテストを自動実行するコマンド",
     long_about = None
 )]
