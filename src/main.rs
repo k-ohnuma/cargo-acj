@@ -13,7 +13,9 @@ struct Cli {
     contest_name: String,
     #[arg(help = "url prefix. ex: a, ax, ...")]
     problem: String,
-    #[arg(help = "実行bin. デフォルトはmain")]
+    #[arg(long, help = "TLE[sec]. デフォルト2.0秒")]
+    tle: Option<f64>,
+    #[arg(long, help = "実行bin. デフォルトはmain")]
     bin: Option<String>,
 }
 
@@ -26,7 +28,7 @@ fn main() -> Result<()> {
     let parser = HtmlParser::new(html.as_str());
     let samples = parser.get_sample()?;
 
-    let judger = Judger::set_up(samples, cli.bin)?;
+    let judger = Judger::set_up(samples, cli.bin, cli.tle)?;
     judger.run()?;
     Ok(())
 }

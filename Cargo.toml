@@ -9,6 +9,7 @@ clap = { version = "4", features = ["derive"] }
 colored = "3.0.0"
 reqwest = {version = "0.12.20", features = ["blocking"]}
 scraper = "0.23.1"
+wait-timeout = "0.2.1"
 
 
 
