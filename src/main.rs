@@ -1,5 +1,5 @@
 use anyhow::Result;
-use cargo_atest::atcoder_client::AtcoderClient;
+use cargo_atest::{atcoder_client::AtcoderClient, html_parser::HtmlParser};
 use clap::Parser;
 
 #[derive(Parser)]
@@ -19,6 +19,8 @@ fn main() -> Result<()> {
     let cli = Cli::parse();
     let client = AtcoderClient::new(cli.contest_name.as_str(), cli.problem.as_str());
     let html = client.get_html()?;
-    println!("{}", html);
+    let parser = HtmlParser::new(html.as_str());
+    let samples = parser.get_sample()?;
+    println!("{:?}", samples);
     Ok(())
 }
