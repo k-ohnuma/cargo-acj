@@ -13,6 +13,8 @@ struct Cli {
     contest_name: String,
     #[arg(help = "url prefix. ex: a, ax, ...")]
     problem: String,
+    #[arg(help = "実行bin. デフォルトはmain")]
+    bin: Option<String>
 }
 
 fn main() -> Result<()> {
