@@ -1,5 +1,5 @@
 use anyhow::Result;
-use cargo_atest::{atcoder_client::AtcoderClient, html_parser::HtmlParser};
+use cargo_atest::{atcoder_client::AtcoderClient, html_parser::HtmlParser, judger::Judger};
 use clap::Parser;
 
 #[derive(Parser)]
@@ -14,15 +14,19 @@ struct Cli {
     #[arg(help = "url prefix. ex: a, ax, ...")]
     problem: String,
     #[arg(help = "実行bin. デフォルトはmain")]
-    bin: Option<String>
+    bin: Option<String>,
 }
 
 fn main() -> Result<()> {
     let cli = Cli::parse_from(std::env::args_os().skip(1));
+
     let client = AtcoderClient::new(cli.contest_name.as_str(), cli.problem.as_str());
     let html = client.get_html()?;
+
     let parser = HtmlParser::new(html.as_str());
     let samples = parser.get_sample()?;
-    println!("{:?}", samples);
+
+    let judger = Judger::set_up(samples, cli.bin)?;
+    judger.run()?;
     Ok(())
 }
