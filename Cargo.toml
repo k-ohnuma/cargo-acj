@@ -2,7 +2,7 @@
 name = "cargo-acj"
 version = "0.1.1"
 edition = "2024"
-authors = ["k-ohnuma <k.a.y.0818.k@gmail.com>"]
+authors = ["k-ohnuma <ohnumaaa@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/k-ohnuma/cargo-acj"
 homepage = "https://github.com/k-ohnuma/cargo-acj"

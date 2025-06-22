@@ -17,7 +17,7 @@ use judger::Judger;
 struct Cli {
     #[arg(help = "ex: abc123, typical90, ...")]
     contest_name: String,
-    #[arg(help = "url prefix. ex: a, ax, ...")]
+    #[arg(help = "url suffix. ex: a, ax, ...")]
     problem: String,
     #[arg(long, help = "TLE[sec]. デフォルト2.0秒")]
     tle: Option<f64>,
