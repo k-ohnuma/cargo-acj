@@ -1,7 +1,7 @@
 use anyhow::Result;
 use scraper::{ElementRef, Html, Selector};
 
-pub struct HtmlParser {
+pub(crate) struct HtmlParser {
     html: Html,
 }
 

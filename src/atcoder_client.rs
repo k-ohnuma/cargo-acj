@@ -2,7 +2,7 @@ use anyhow::{Result, anyhow};
 
 pub const ATCODER_BASE_URL: &str = "https://atcoder.jp/contests";
 
-pub struct AtcoderClient {
+pub(crate) struct AtcoderClient {
     pub endpoint: String,
     pub client: reqwest::blocking::Client,
 }

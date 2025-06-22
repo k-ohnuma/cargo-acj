@@ -8,7 +8,7 @@ use wait_timeout::ChildExt;
 
 use anyhow::Result;
 
-pub struct Judger {
+pub(crate) struct Judger {
     samples: Vec<(String, String)>,
     run_bin: Option<String>,
     tle_time: f64,

@@ -1,6 +1,12 @@
+mod atcoder_client;
+mod html_parser;
+mod judger;
+
 use anyhow::Result;
-use cargo_acj::{atcoder_client::AtcoderClient, html_parser::HtmlParser, judger::Judger};
+use atcoder_client::AtcoderClient;
 use clap::Parser;
+use html_parser::HtmlParser;
+use judger::Judger;
 
 #[derive(Parser)]
 #[command(
