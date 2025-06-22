@@ -28,7 +28,7 @@ struct Cli {
 fn main() -> Result<()> {
     let cli = Cli::parse_from(std::env::args_os().skip(1));
 
-    let client = AtcoderClient::new(cli.contest_name.as_str(), cli.problem.as_str());
+    let client = AtcoderClient::new(cli.contest_name.as_str(), cli.problem.as_str())?;
     let html = client.get_html()?;
 
     let parser = HtmlParser::new(html.as_str());
