@@ -1,6 +1,6 @@
 [package]
 name = "cargo-acj"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["k-ohnuma <ohnumaaa@gmail.com>"]
 license = "MIT"
@@ -15,6 +15,7 @@ description = "Automatically test AtCoder sample cases"
 anyhow = "1.0.98"
 clap = { version = "4", features = ["derive"] }
 colored = "3.0.0"
+itertools = "0.14.0"
 reqwest = {version = "0.12.20", features = ["blocking"]}
 scraper = "0.23.1"
 wait-timeout = "0.2.1"

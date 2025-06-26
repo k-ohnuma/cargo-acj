@@ -1,4 +1,5 @@
 use colored::Colorize;
+use itertools::Itertools;
 use std::{
     io::Write,
     process::{Command, Stdio},
@@ -40,6 +41,8 @@ impl Judger {
     }
 
     fn collect_judge(input: &str, expected: &str, actual: &str, problem_idx: usize) {
+        let expected = expected.split('\n').map(|e| e.trim_end()).join("\n");
+        let actual = actual.split('\n').map(|e| e.trim_end()).join("\n");
         if actual == expected.trim_end() {
             println!(
                 "{}",
