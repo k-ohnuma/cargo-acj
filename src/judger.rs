@@ -1,5 +1,5 @@
 use colored::Colorize;
-use itertools::Itertools;
+use itertools::{Itertools, izip};
 use std::{
     io::Write,
     process::{Command, Stdio},
@@ -40,24 +40,60 @@ impl Judger {
         })
     }
 
+    const EPS: f64 = 1e-10;
+
+    fn tokens_equal(a: &str, b: &str) -> bool {
+        if a == b {
+            return true;
+        }
+        let (fa, fb) = (a.parse::<f64>(), b.parse::<f64>());
+        match (fa, fb) {
+            (Ok(da), Ok(db)) => {
+                let diff = (da - db).abs();
+                diff < Self::EPS
+            }
+            _ => false,
+        }
+    }
+
+    fn print_ok(problem_idx: usize) {
+        println!(
+            "{}",
+            format!("Sample {} Passed!!", problem_idx + 1)
+                .green()
+                .bold()
+        );
+    }
+
+    fn print_failed(input: &str, expected: &str, actual: &str, problem_idx: usize) {
+        println!(
+            "{}",
+            format!("Sample {} failed...", problem_idx + 1).red().bold()
+        );
+        println!("-- Input:\n{}", input);
+        println!("-- Expected:\n{}", expected);
+        println!("-- Actual:\n{}", actual);
+    }
+
     fn collect_judge(input: &str, expected: &str, actual: &str, problem_idx: usize) {
         let expected = expected.split('\n').map(|e| e.trim_end()).join("\n");
         let actual = actual.split('\n').map(|e| e.trim_end()).join("\n");
         if actual == expected.trim_end() {
-            println!(
-                "{}",
-                format!("Sample {} Passed!!", problem_idx + 1)
-                    .green()
-                    .bold()
-            );
+            Self::print_ok(problem_idx);
         } else {
-            println!(
-                "{}",
-                format!("Sample {} failed...", problem_idx + 1).red().bold()
-            );
-            println!("-- Input:\n{}", input);
-            println!("-- Expected:\n{}", expected);
-            println!("-- Actual:\n{}", actual);
+            let expected_v = expected.split('\n').collect_vec();
+            let actual_v = actual.split('\n').collect_vec();
+            if expected_v.len() != actual_v.len() {
+                Self::print_failed(input, expected.as_str(), actual.as_str(), problem_idx);
+                return;
+            }
+            for (expe, actu) in izip!(expected_v, actual_v) {
+                if !Self::tokens_equal(expe, actu) {
+                    Self::print_failed(input, expected.as_str(), actual.as_str(), problem_idx);
+                    return;
+                }
+            }
+            Self::print_ok(problem_idx);
         }
     }
 
